@@ -53,7 +53,7 @@ App Store:
     except InAppValidationError:
         """ handle validation error """
 
-If you are validating a receipt from a auto-renewable subscription, you must add your a
+If you are validating a receipt from a auto-renewable subscription, you must add your 
 `shared secret 
 <https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html#//apple_ref/doc/uid/TP40010573-CH104-SW1>`_.
 

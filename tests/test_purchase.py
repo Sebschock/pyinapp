@@ -11,7 +11,6 @@ def test_create_from_google_play_receipt():
 
     assert purchase.transaction_id == receipt['orderId']
     assert purchase.product_id == receipt['productId']
-    assert purchase.purchased_at == receipt['purchaseTime']
     assert purchase.quantity == 1
 
 
@@ -25,7 +24,6 @@ def test_create_from_test_google_play_receipt():
 
     assert purchase.transaction_id == receipt['purchaseToken']
     assert purchase.product_id == receipt['productId']
-    assert purchase.purchased_at == receipt['purchaseTime']
     assert purchase.quantity == 1
 
 
@@ -40,5 +38,4 @@ def test_create_from_app_store_receipt():
 
     assert purchase.transaction_id == receipt['transaction_id']
     assert purchase.product_id == receipt['product_id']
-    assert purchase.purchased_at == receipt['purchase_date']
     assert purchase.quantity == receipt['quantity']

@@ -42,13 +42,13 @@ class AppStoreValidator(object):
             error = api_result_errors.get(status, InAppValidationError('Unknown API status'))
             raise error
 
-        receipt = api_response['receipt']
-        purchases = self._parse_receipt(receipt)
+        purchases = self._parse_receipt(api_response)
         return purchases
 
-    def _parse_receipt(self, receipt):
+    def _parse_receipt(self, api_response):
+        receipt = api_response['receipt']
         if 'in_app' in receipt:
-            return self._parse_ios7_receipt(receipt)
+            return self._parse_ios7_receipt(api_response)
         return self._parse_ios6_receipt(receipt)
 
     def _parse_ios6_receipt(self, receipt):
@@ -56,7 +56,11 @@ class AppStoreValidator(object):
             raise InAppValidationError('Bundle id mismatch')
         return [Purchase.from_app_store_receipt(receipt)]
 
-    def _parse_ios7_receipt(self, receipt):
+    def _parse_ios7_receipt(self, api_response):
+        receipt = api_response['receipt']
         if self.bundle_id != receipt['bundle_id']:
             raise InAppValidationError('Bundle id mismatch')
+        if 'latest_receipt_info' in api_response:
+            return [Purchase.from_app_store_receipt(r) for r in
+                    api_response['latest_receipt_info']]
         return [Purchase.from_app_store_receipt(r) for r in receipt['in_app']]

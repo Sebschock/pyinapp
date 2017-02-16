@@ -4,7 +4,7 @@ import datetime
 class Purchase(object):
 
     def __init__(self, transaction_id, product_id, quantity, purchased_at,
-                 expires_date):
+                 expires_date=None):
         self.transaction_id = transaction_id
         self.product_id = product_id
         self.quantity = quantity

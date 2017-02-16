@@ -53,6 +53,11 @@ App Store:
     except InAppValidationError:
         """ handle validation error """
 
+If you are validating a receipt from a auto-renewable subscription, you must add your a (shared secret)[https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html#//apple_ref/doc/uid/TP40010573-CH104-SW1]
+
+.. code:: python
+    validator = AppStoreValidator(bundle_id, 'shared_secret')
+
 **Important!**
 If your version is under 0.1.3, you need to check the type of purchases. For the sake of convenience you can process purchases this way:
 
